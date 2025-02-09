@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Create an Account</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+
+        <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+
+    {% if error_message %}
+    <p class="error-message">Already existed username, choose another one.</p>
+    {% endif %}
+
+    <p class="switch-text">Already have an account?</p>
+    <a href="{% url 'login' %}" class="login-btn">Login</a>
+</div>
+
+</body>
+</html>

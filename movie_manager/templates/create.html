@@ -1,0 +1,13 @@
+
+
+{% block content %}
+
+<h1>Create Movies</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+   {{ frm.as_p }}
+    <button type="submit">submit</button>
+</form>
+
+{% endblock content %}
