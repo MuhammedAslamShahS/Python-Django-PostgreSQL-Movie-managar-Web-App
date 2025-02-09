@@ -23,12 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-e0b8pxd@9#ex!rhh)we_#1@s##3)iihb=ke!f)%zvg*ptdp+ej'
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+# SECRET_KEY = 'django-insecure-e0b8pxd@9#ex!rhh)we_#1@s##3)iihb=ke!f)%zvg*ptdp+ej'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -96,7 +98,8 @@ if db_from_env:
     
     
 # Use Render PostgreSQL database in production
-DATABASES["default"] = dj_database_url.parse("postgresql://movie_manager_user:wjik7WHxdfmGfDLPiLHeBvoErAU7sDza@dpg-cukcslrtq21c73e5lik0-a.oregon-postgres.render.com/movie_manager")
+database_url = os.environ.get("DATABASE_URL")
+DATABASES["default"] = dj_database_url.parse(database_url)
 # 
 
 # Password validation
