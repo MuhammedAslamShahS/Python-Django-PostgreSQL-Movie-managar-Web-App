@@ -89,6 +89,13 @@ DATABASES = {
     }
 }
 
+# Override database settings if DATABASE_URL is set (for production)
+db_from_env = dj_database_url.config(conn_max_age=600)
+if db_from_env:
+    DATABASES["default"].update(db_from_env)
+    
+    
+# Use Render PostgreSQL database in production
 DATABASES["default"] = dj_database_url.parse("postgresql://movie_manager_user:wjik7WHxdfmGfDLPiLHeBvoErAU7sDza@dpg-cukcslrtq21c73e5lik0-a.oregon-postgres.render.com/movie_manager")
 # 
 
@@ -131,9 +138,17 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
+
+# Added for production deployment (e.g., Render or Heroku)
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 MEDIA_URL='media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
