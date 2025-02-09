@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import dj_database_url
 
 from pathlib import Path
 
@@ -88,6 +89,8 @@ DATABASES = {
     }
 }
 
+DATABASES["default"] = dj_database_url.parse("postgresql://movie_manager_user:wjik7WHxdfmGfDLPiLHeBvoErAU7sDza@dpg-cukcslrtq21c73e5lik0-a.oregon-postgres.render.com/movie_manager")
+# 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
